@@ -4,7 +4,7 @@
 ### Usage
 ```ruby
 User = Struct.new(:name, :job, keyword_init: true)
-user = User.new job: 'hexlet'
+user = User.new job: "hexlet"
 
 HexletCode.form_for user do |f|
   f.input :name

@@ -63,7 +63,7 @@ RSpec.describe HexletCode do
     end
 
     it "should render complex form" do
-      user = User.new job: 'hexlet'
+      user = User.new job: "hexlet"
 
       form = HexletCode.form_for user do |f|
         f.input :name
