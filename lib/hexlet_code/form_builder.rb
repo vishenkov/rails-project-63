@@ -9,8 +9,9 @@ module HexletCode
 
     def form(options, &block)
       action = options[:url] || "#"
+      method = options[:method] || "post"
 
-      Tag.build("form", action: action, method: "post") do
+      Tag.build("form", action: action, method: method, **options.except(:url, :method)) do
         block&.call
       end
     end
@@ -25,8 +26,7 @@ module HexletCode
     end
 
     def input(name, args = {})
-      as_arg = args.fetch(:as, :input)
-      tag_name = as_arg == :text ? "textarea" : "input"
+      tag_name = args.fetch(:as, :input) == :text ? "textarea" : "input"
 
       value = @object.public_send(name)
 
@@ -36,6 +36,8 @@ module HexletCode
         value: value,
         **args.except(:as)
       }.compact
+
+      label(name)
 
       tag_name == "input" ? build_input(tag_args) : build_textarea(tag_args)
     end
@@ -51,9 +53,6 @@ module HexletCode
     private
 
     def build_input(args)
-      name = args[:name]
-      label(name) unless name.nil?
-
       @fields << Tag.build("input", **args)
     end
 
