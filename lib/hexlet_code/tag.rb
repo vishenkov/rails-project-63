@@ -15,7 +15,7 @@ module HexletCode
       body = yield if block_given?
 
       result += body unless body.nil?
-      result += "</#{tag}>" unless SINGLE_TAGS.include? tag
+      result += "</#{tag}>" unless SINGLE_TAGS.include?(tag)
 
       result
     end
