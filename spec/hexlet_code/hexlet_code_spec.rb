@@ -61,6 +61,18 @@ RSpec.describe HexletCode do
 
       expect(form).to eq(Spec::Helpers.read_fixture("input_form.html").read)
     end
+
+    it "should render complex form" do
+      user = User.new job: 'hexlet'
+
+      form = HexletCode.form_for user do |f|
+        f.input :name
+        f.input :job
+        f.submit
+      end
+
+      expect(form).to eq(Spec::Helpers.read_fixture("complex_form.html").read)
+    end
   end
 end
 

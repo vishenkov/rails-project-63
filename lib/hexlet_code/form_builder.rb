@@ -32,9 +32,10 @@ module HexletCode
 
       tag_args = {
         name: name,
+        type: args[:type] || "text",
         value: value,
         **args.except(:as)
-      }
+      }.compact
 
       tag_name == "input" ? build_input(tag_args) : build_textarea(tag_args)
     end
@@ -58,7 +59,7 @@ module HexletCode
 
     def build_textarea(args)
       tag_args = {
-        **args.except(:value),
+        **args.except(:value, :type),
         rows: args[:rows] || "20",
         cols: args[:cols] || "40"
       }
